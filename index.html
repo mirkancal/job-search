@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Title</title>
+    <script type="text/javascript" src="App.js"></script>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+</head>
+
+<body id="body">
+<div class="search-card" id="delete">
+    <div class="container">
+        <h4><b>Find a dream job</b></h4>
+        <form action="javascript:_getJobs(document.getElementById('desc').value, document.getElementById('location').value, document.getElementById('full_time').checked)">
+            <input type="text" id="desc" placeholder="What are you looking for?"><br>
+            <input type="text" id="location" placeholder="Where you looking for?"><br>
+            Full Time: <input type="checkbox" id="full_time"><br>
+            <input type="submit" value="Find a Job">
+        </form>
+    </div>
+</div>
+
+<div id="div-to-replace"></div>
+<p class="footer">Powered by<i class="fab fa-github-square"></i></p>
+</body>
+</html>
