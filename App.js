@@ -1,6 +1,18 @@
-_getJobs = (desc, location, fullTime) => {
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition( (location) => {
+                document.getElementById("lat").value = location.coords.latitude;
+                document.getElementById("long").value = location.coords.longitude;
+            }
+        );
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
+}
 
-    const url=`https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?description=${desc}&full_time=${fullTime}&location=${location}`;
+_getJobs = (desc, location, fullTime, lat, long) => {
+
+    const url=`https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?description=${desc}&full_time=${fullTime}&location=${location}&lat=${lat}&long=${long}`;
     return fetch(url)
         .then(response => response.json())
 .then(responseJson => {
@@ -14,7 +26,6 @@ _getJobs = (desc, location, fullTime) => {
 
 renderJSON = (response) => {
 
-    var body = document.getElementById("body");
     var divToReplace = document.createElement("div");
 
     response.map((data) => {
