@@ -1,31 +1,90 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Search Github Jobs</title>
+    <title>Firebase Login</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="Login/login.css"/>
+    <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBjsf9HIfnnExyGWREhUayKQqkGOH7lByo",
+            authDomain: "find-job-abc60.firebaseapp.com",
+            databaseURL: "https://find-job-abc60.firebaseio.com",
+            projectId: "find-job-abc60",
+            storageBucket: "find-job-abc60.appspot.com",
+            messagingSenderId: "261244592840"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <script src="Login/login.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+</head>
+<body>
+
+<div id="login_div" class="main-div">
+    <h3>Login</h3>
+    <input type="email" id="login_email_field" placeholder="type your email"/>
+    <input type="password" id="login_password_field" placeholder="type your password"/>
+
+    <button onclick="loginFromFirebase()">Login to Account</button>
+    <button onclick="goSignUp()">Go to Sign-up</button>
+</div>
+
+<div id="sign_up_div" class="sign-up-div">
+    <h3>Signup</h3>
+    <form autocomplete="on">
+        <input name="fname" id="sign_up_fname" placeholder="type your first name"/>
+        <input name="lname" id="sign_up_lname" placeholder="type your last name"/>
+        <input name="email" type="email" id="sign_up_email_field" placeholder="type your email"/>
+        <input type="password" id="sign_up_password_field" placeholder="type your password" minlength="6" required/>
+    </form>
+
+    <button onclick="signupFromFirebase()">Sign-up</button>
+    <button onclick="goLogin()">Login to Account</button>
+</div>
+
+
+<div id="user_div" class="loggedin-div">
+
     <script type="text/javascript" src="App.js"></script>
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-</head>
 
-<body id="body">
-<div class="search-card" id="delete">
-    <div class="container">
-        <img src="https://jobs.github.com/images/layout/logo.png" alt="github jobs logo">
-        <form action="javascript:_getJobs(document.getElementById('desc').value, document.getElementById('location').value, document.getElementById('full_time').checked, document.getElementById('lat').value, document.getElementById('long').value)">
-            <input type="text" id="desc" placeholder="What are you looking for?"><br>
-            <input type="text" id="location" placeholder="Where you looking for?"><br>
-            <input type="text" id="lat" placeholder="latitude"><br>
-            <input type="text" id="long" placeholder="longitude"><br>
-            Full Time: <input type="checkbox" id="full_time"><br>
-            <input type="submit" value="Find a Job">
-        </form>
-        <button onclick="getLocation()"><i class="fas fa-location-arrow"></i></button><br>
+    <h3>Welcome User</h3>
+    <p id="user_para">Welcome to Firebase web login Example. You're currently logged in.</p>
+    <button onclick="logoutFromFirebase()">Logout</button>
+    <button onclick="logoutFromFirebase()">See Bookmarks</button>
+
+
+    <div class="search-card" id="delete">
+        <div class="container">
+            <img class="image-github" src="https://jobs.github.com/images/layout/logo.png" alt="github jobs logo">
+            <form action="javascript:_getJobs(document.getElementById('desc').value, document.getElementById('location').value, document.getElementById('full_time').checked, document.getElementById('lat').value, document.getElementById('long').value)">
+                <input type="text" id="desc" placeholder="What are you looking for?"><br>
+                <input type="text" id="location" placeholder="Where you looking for?"><br>
+                <input type="text" id="lat" placeholder="latitude"><br>
+                <input type="text" id="long" placeholder="longitude"><br>
+                Full Time: <input type="checkbox" id="full_time"><br>
+                <input type="submit" value="Find a Job">
+            </form>
+            <button onclick="getLocation()"><i class="fas fa-location-arrow"></i></button><br>
+        </div>
     </div>
+
+    <div id="div-to-replace"></div>
+    <p class="footer">Powered by<i class="fab fa-github-square"></i></p>
+
+
 </div>
 
-<div id="div-to-replace"></div>
-<p class="footer">Powered by<i class="fab fa-github-square"></i></p>
+<div id="find_job" class="find-job">
+
+    <script type="text/javascript" src="App.js"></script>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+</div>
+
+
 </body>
 </html>

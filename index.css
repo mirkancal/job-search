@@ -6,15 +6,9 @@ body {
 }
 
 .search-card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px 0 rgba(0.2, 0.2, 0.2, 0.2);
     transition: 0.3s;
     border-radius: 5px; /* 5px rounded corners */
-    margin: 25vh auto;
-    color: #fff;
-    background: #005C97;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #363795, #005C97);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #363795, #005C97); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
 
 }
 
@@ -30,6 +24,12 @@ body {
 
 
 
+}
+
+.image-github {
+    background-color: #5d8ffc;
+    border: 1px solid #5d8ffc;
+    margin: 5px;
 }
 
 .title {
