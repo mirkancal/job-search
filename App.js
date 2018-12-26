@@ -1,6 +1,6 @@
 function getLocation() {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition( (location) => {
+        navigator.geolocation.getCurrentPosition((location) => {
                 document.getElementById("lat").value = location.coords.latitude;
                 document.getElementById("long").value = location.coords.longitude;
             }
@@ -12,24 +12,35 @@ function getLocation() {
 
 _getJobs = (desc, location, fullTime, lat, long) => {
 
-    const url=`https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?description=${desc}&full_time=${fullTime}&location=${location}&lat=${lat}&long=${long}`;
+    const url = `https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?description=${desc}&full_time=${fullTime}&location=${location}&lat=${lat}&long=${long}`;
     return fetch(url)
         .then(response => response.json())
-.then(responseJson => {
-    console.log(fullTime);
-        renderJSON(responseJson);
-})
-.catch(error => {
-        console.error(error);
-});
+        .then(responseJson => {
+            console.log(fullTime);
+            renderJSON(responseJson);
+        })
+        .catch(error => {
+            console.error(error);
+        });
 };
+
+
+let jobsObject = [];
+
+function jobs(param) {
+    console.log(jobsObject.length);
+    console.log('id : ', param);
+}
 
 renderJSON = (response) => {
 
     var divToReplace = document.createElement("div");
 
-    response.map((data) => {
+    jobsObject = [];
 
+    response.map((data) => {
+        jobsObject.push(data.id);
+        console.log(JSON.stringify(jobsObject));
         // card
         var card = document.createElement("div");
         card.className = "job-card";
@@ -42,6 +53,14 @@ renderJSON = (response) => {
         var companyLogo = document.createElement("img");
         companyLogo.className = "company-logo";
         data.company_logo ? companyLogo.src = data.company_logo : companyLogo.src = "https://upload.wikimedia.org/wikipedia/commons/9/93/No-logo.svg";
+
+        //add bookmark
+        var addBookMark = document.createElement("button");
+        addBookMark.innerText = "Add to Bookmark";
+        addBookMark.addEventListener('click', function () {
+            alert('OnClick');
+            alert(data.id);
+        }, false);// fix hereee
 
         // position title
         var positionTitle = document.createElement("p");
@@ -60,11 +79,12 @@ renderJSON = (response) => {
 
         var description = document.createElement("div");
         description.className = "description";
-        cleanText = data.description.replace(/(\r\n\t|\n|\r\t)/gm,"");
+        cleanText = data.description.replace(/(\r\n\t|\n|\r\t)/gm, "");
         description.innerHTML = cleanText;
 
         // create card with nodes
         container.appendChild(companyLogo);
+        container.appendChild(addBookMark);
         container.appendChild(positionTitle);
         container.appendChild(company);
         container.appendChild(location);
