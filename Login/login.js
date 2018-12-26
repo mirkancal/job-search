@@ -2,8 +2,8 @@ firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         // User is signed in.
 
-        document.getElementById("find_job").style.display = "block";
         document.getElementById("user_div").style.display = "block";
+        document.getElementById("search_div").style.display = "block";
         document.getElementById("login_div").style.display = "none";
         document.getElementById("sign_up_div").style.display = "none";
 
@@ -19,7 +19,7 @@ firebase.auth().onAuthStateChanged(function (user) {
     } else {
         // No user is signed in.
 
-        document.getElementById("find_job").style.display = "none";
+        document.getElementById("search_div").style.display = "none";
         document.getElementById("user_div").style.display = "none";
         document.getElementById("user_div").style.display = "none";
         document.getElementById("login_div").style.display = "block";
@@ -28,7 +28,6 @@ firebase.auth().onAuthStateChanged(function (user) {
 });
 
 function goSignUp() {
-    console.log('hihihiihihihi');
     document.getElementById("sign_up_div").style.display = "block";
     document.getElementById("login_div").style.display = "none";
 }
@@ -76,4 +75,8 @@ function loginFromFirebase() {
 
 function logoutFromFirebase() {
     firebase.auth().signOut();
+}
+
+function seeBookmarks() {
+    alert('Will be added later !!');
 }

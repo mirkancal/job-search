@@ -1,27 +1,23 @@
-body {
-    background: #fff;
-    padding: 0px;
-    margin: 0px;
-    font-family: 'Nunito', sans-serif;
-    font-size: 16px;
-}
-
 input, button {
     font-family: 'Nunito', sans-serif;
     font-weight: 700;
 }
 
-.main-div, .loggedin-div, .sign-up-div, find-job {
+.main-div, .loggedin-div, .sign-up-div, .search-job {
     background-color: white;
     border-radius: 25px;
-    width: 50%;
+    width: 40vw;
     margin: 0px auto;
     margin-top: 150px;
     padding: 20px;
     display: none;
 }
 
-.main-div input, .sign-up-div input {
+.search-job {
+    width: 95vw;
+}
+
+.main-div input, .sign-up-div input, .search-job input {
     display: block;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -35,11 +31,11 @@ input, button {
     -moz-transition: 0.3s;
 }
 
-.main-div input:focus, .sign-up-div input:focus {
+.main-div input:focus, .sign-up-div input:focus, .search-job input:focus {
     border: 1px solid #777;
 }
 
-.main-div button, .loggedin-div button, .sign-up-div button {
+.main-div button, .loggedin-div button, .sign-up-div button, .search-job button {
     background: #5d8ffc;
     color: #fff;
     border: 1px solid #5d8ffc;
@@ -53,7 +49,7 @@ input, button {
     margin-bottom: 15px;
 }
 
-.main-div button:hover, .loggedin-div button:hover {
+.main-div button:hover, .loggedin-div button:hover, .search-job button:hover{
     background: #fff;
     color: #5d8ffc;
     border: 1px solid #5d8ffc;

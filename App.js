@@ -74,7 +74,7 @@ renderJSON = (response) => {
 
         divToReplace.appendChild(card);
 
-        window.scrollTo(0, 500);
+        window.scrollTo(0, 800);
     });
 
     document.getElementById("div-to-replace").innerHTML = divToReplace.innerHTML;

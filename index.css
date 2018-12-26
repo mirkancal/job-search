@@ -32,6 +32,10 @@ body {
     margin: 5px;
 }
 
+.get-location {
+    width: 50%;
+}
+
 .title {
     color: white;
 }
