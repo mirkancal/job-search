@@ -56,7 +56,7 @@ function signupFromFirebase() {
                 email: email,
                 password: password
             });
-            console.log('successs');
+
         }).catch(e => {
         window.alert('Error happen' + e);
     })
@@ -108,7 +108,7 @@ _getJobs = (desc, location, fullTime, lat, long) => {
     return fetch(url)
         .then(response => response.json())
         .then(responseJson => {
-            console.log(fullTime);
+
             renderJSON(responseJson);
         })
         .catch(error => {
@@ -169,8 +169,9 @@ function seeBookmarks() {
                 description.innerHTML = cleanText;
 
                 var removeBookmark = document.createElement("button");
+                removeBookmark.innerHTML = "<i class=\"fas fa-trash-alt\"></i>";
                 removeBookmark.onclick = function () {
-                    console.log('hereee');
+
                     firebase.firestore().collection('user').doc(firebaseUserID).collection('bookmarks').doc(jobInfo.id).delete().then(function () {
                         seeBookmarks();
                     }).catch(function (error) {
@@ -212,7 +213,7 @@ renderJSON = (response) => {
 
     response.map((data, index) => {
         jobsObject.push(data.id);
-        console.log(JSON.stringify(jobsObject));
+
         // card
         var card = document.createElement("div");
         card.className = "job-card";
@@ -249,14 +250,12 @@ renderJSON = (response) => {
 
         //bookmark button
         var bookmarkButton = document.createElement("button");
+        bookmarkButton.innerHTML = "<i class=\"fas fa-bookmark\"></i>";
         bookmarkButton.onclick = function () {
-            console.log(data.id);
-            console.log(firebaseUserID);
-            console.log('hereee');
             firebase.firestore().collection('user').doc(firebaseUserID).collection('bookmarks').doc(data.id).set({
                 data
             }, {merge: true});
-            console.log("hello");
+
         };
 
         // create card with nodes
