@@ -119,11 +119,17 @@ _getJobs = (desc, location, fullTime, lat, long) => {
 
 function seeBookmarks() {
 
-    // remove previous bookmarks before every render
-    var myNode = document.getElementById("bookmark");
-    while (myNode.firstChild) {
-        myNode.removeChild(myNode.firstChild);
+    //remove bookmarks before every render
+    var bookmarkNode = document.getElementById("bookmark");
+    while (bookmarkNode.firstChild) {
+        bookmarkNode.removeChild(bookmarkNode.firstChild);
     }
+    // remove content before every render
+    var contentNode = document.getElementById("content");
+    while (contentNode.firstChild) {
+        contentNode.removeChild(contentNode.firstChild);
+    }
+
     firebase.firestore().collection('user').doc(firebaseUserID).collection('bookmarks').get()
         .then((data) => {
             data.forEach((doc) => {
@@ -162,11 +168,23 @@ function seeBookmarks() {
                 cleanText = jobInfo.description.replace(/(\r\n\t|\n|\r\t)/gm, "");
                 description.innerHTML = cleanText;
 
+                var removeBookmark = document.createElement("button");
+                removeBookmark.onclick = function () {
+                    console.log('hereee');
+                    firebase.firestore().collection('user').doc(firebaseUserID).collection('bookmarks').doc(jobInfo.id).delete().then(function () {
+                        seeBookmarks();
+                    }).catch(function (error) {
+                        console.error("Error removing document: ", error);
+                    });
+                };
+
+
                 container.appendChild(companyLogo);
                 container.appendChild(positionTitle);
                 container.appendChild(company);
                 container.appendChild(location);
                 container.appendChild(description);
+                container.appendChild(removeBookmark);
 
                 card.appendChild(container);
 
@@ -180,10 +198,16 @@ function seeBookmarks() {
 renderJSON = (response) => {
 
     jobsObject = [];
+
+    //remove bookmarks before every render
+    var bookmarkNode = document.getElementById("bookmark");
+    while (bookmarkNode.firstChild) {
+        bookmarkNode.removeChild(bookmarkNode.firstChild);
+    }
     // remove content before every render
-    var myNode = document.getElementById("content");
-    while (myNode.firstChild) {
-        myNode.removeChild(myNode.firstChild);
+    var contentNode = document.getElementById("content");
+    while (contentNode.firstChild) {
+        contentNode.removeChild(contentNode.firstChild);
     }
 
     response.map((data, index) => {
@@ -229,7 +253,7 @@ renderJSON = (response) => {
             console.log(data.id);
             console.log(firebaseUserID);
             console.log('hereee');
-            firebase.firestore().collection('user').doc(firebaseUserID).collection('bookmarks').doc().set({
+            firebase.firestore().collection('user').doc(firebaseUserID).collection('bookmarks').doc(data.id).set({
                 data
             }, {merge: true});
             console.log("hello");
