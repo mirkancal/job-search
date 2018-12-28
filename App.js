@@ -82,9 +82,6 @@ function logoutFromFirebase() {
     firebase.auth().signOut();
 }
 
-function seeBookmarks() {
-    alert('Will be added later !!');
-}
 
 /* login part on the upp */
 
@@ -119,29 +116,20 @@ _getJobs = (desc, location, fullTime, lat, long) => {
         });
 };
 
-function createButton(index, data) {
-    var button = document.createElement("button");
-    button.innerHTML = "button" + index;
-    button.value = data.id;
-    button.onclick = function () {
-        console.log(data.id);
-        console.log(firebaseUserID);
-        console.log('hereee');
-        firebase.firestore().collection('user').doc(firebaseUserID).collection('bookmarks').doc().set({
-            data
-        }, {merge: true});
-    };
-    document.body.appendChild(button);
-}
-
 
 function seeBookmarks() {
-    firebase.firestore().collection('user').doc(firebaseUserID).collection('bookmarks').get().then((data) => renderJSON(data));
+    firebase.firestore().collection('user').doc(firebaseUserID).collection('bookmarks').get()
+        .then((data) => {
+            data.forEach((doc) => {
+                jobInfo = doc.data().data;
+
+
+            })
+        });
 }
 
-renderJSON = (response) => {
 
-    var divToReplace = document.createElement("div");
+renderJSON = (response) => {
 
     jobsObject = [];
 
@@ -161,19 +149,6 @@ renderJSON = (response) => {
         companyLogo.className = "company-logo";
         data.company_logo ? companyLogo.src = data.company_logo : companyLogo.src = "https://upload.wikimedia.org/wikipedia/commons/9/93/No-logo.svg";
 
-        //add bookmark
-        /*
-        var button = document.createElement("button");
-        button.innerHTML = "button" + index;
-        button.value = "hello" + index;
-        container.appendChild(button);
-        button.onclick = function () {
-            console.log("event on button : ", this.value);
-        };
-        */
-
-        createButton(index, data);
-
         // position title
         var positionTitle = document.createElement("p");
         positionTitle.className = "title";
@@ -189,10 +164,23 @@ renderJSON = (response) => {
         location.className = "location";
         location.innerText = `Location: ${data.location}`;
 
+        //description
         var description = document.createElement("div");
         description.className = "description";
         cleanText = data.description.replace(/(\r\n\t|\n|\r\t)/gm, "");
         description.innerHTML = cleanText;
+
+        //bookmark button
+        var bookmarkButton = document.createElement("button");
+        bookmarkButton.onclick = function () {
+            console.log(data.id);
+            console.log(firebaseUserID);
+            console.log('hereee');
+            firebase.firestore().collection('user').doc(firebaseUserID).collection('bookmarks').doc().set({
+                data
+            }, {merge: true});
+            console.log("hello");
+        };
 
         // create card with nodes
         container.appendChild(companyLogo);
@@ -200,15 +188,17 @@ renderJSON = (response) => {
         container.appendChild(company);
         container.appendChild(location);
         container.appendChild(description);
+        container.appendChild(bookmarkButton);
 
         card.appendChild(container);
 
-        divToReplace.appendChild(card);
+        document.getElementById("content").appendChild(card);
+
 
         window.scrollTo(0, 800);
     });
 
-    document.getElementById("div-to-replace").innerHTML = divToReplace.innerHTML;
+
 };
 
 
