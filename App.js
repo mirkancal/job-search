@@ -173,6 +173,7 @@ function seeBookmarks() {
                 removeBookmark.onclick = function () {
 
                     firebase.firestore().collection('user').doc(firebaseUserID).collection('bookmarks').doc(jobInfo.id).delete().then(function () {
+                        alert('Removed Bookmark Successfully!!');
                         seeBookmarks();
                     }).catch(function (error) {
                         console.error("Error removing document: ", error);
@@ -256,7 +257,9 @@ renderJSON = (response) => {
         bookmarkButton.onclick = function () {
             firebase.firestore().collection('user').doc(firebaseUserID).collection('bookmarks').doc(data.id).set({
                 data
-            }, {merge: true});
+            }, {merge: true}).then(()=>{
+                alert('added to Bookmarks Successfully !!');
+            })
 
         };
 
