@@ -118,11 +118,59 @@ _getJobs = (desc, location, fullTime, lat, long) => {
 
 
 function seeBookmarks() {
+
+    // remove previous bookmarks before every render
+    var myNode = document.getElementById("bookmark");
+    while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+    }
     firebase.firestore().collection('user').doc(firebaseUserID).collection('bookmarks').get()
         .then((data) => {
             data.forEach((doc) => {
                 jobInfo = doc.data().data;
 
+                var card = document.createElement("div");
+                card.className = "job-card";
+
+                // container
+                var container = document.createElement("div");
+                container.className = "container";
+
+                // company logo
+                var companyLogo = document.createElement("img");
+                companyLogo.className = "company-logo";
+                jobInfo.company_logo ? companyLogo.src = jobInfo.company_logo : companyLogo.src = "https://upload.wikimedia.org/wikipedia/commons/9/93/No-logo.svg";
+
+                // position title
+                var positionTitle = document.createElement("p");
+                positionTitle.className = "title";
+                positionTitle.innerHTML = `<a href="${jobInfo.url}">${jobInfo.title}</a>`;
+
+                // organization name
+                var company = document.createElement("p");
+                company.className = "company";
+                company.innerHTML = `Company: <a href="${jobInfo.company_url}">${jobInfo.company}</a>`;
+
+                // location info
+                var location = document.createElement("p");
+                location.className = "location";
+                location.innerText = `Location: ${jobInfo.location}`;
+
+                //description
+                var description = document.createElement("div");
+                description.className = "description";
+                cleanText = jobInfo.description.replace(/(\r\n\t|\n|\r\t)/gm, "");
+                description.innerHTML = cleanText;
+
+                container.appendChild(companyLogo);
+                container.appendChild(positionTitle);
+                container.appendChild(company);
+                container.appendChild(location);
+                container.appendChild(description);
+
+                card.appendChild(container);
+
+                document.getElementById("bookmark").appendChild(card);
 
             })
         });
@@ -132,6 +180,11 @@ function seeBookmarks() {
 renderJSON = (response) => {
 
     jobsObject = [];
+    // remove content before every render
+    var myNode = document.getElementById("content");
+    while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+    }
 
     response.map((data, index) => {
         jobsObject.push(data.id);
