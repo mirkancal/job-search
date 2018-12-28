@@ -182,14 +182,16 @@ function seeBookmarks() {
 
                 container.appendChild(companyLogo);
                 container.appendChild(positionTitle);
+                container.appendChild(removeBookmark);
                 container.appendChild(company);
                 container.appendChild(location);
                 container.appendChild(description);
-                container.appendChild(removeBookmark);
 
                 card.appendChild(container);
 
                 document.getElementById("bookmark").appendChild(card);
+
+                window.scrollTo(0, 1280);
 
             })
         });
@@ -261,17 +263,16 @@ renderJSON = (response) => {
         // create card with nodes
         container.appendChild(companyLogo);
         container.appendChild(positionTitle);
+        container.appendChild(bookmarkButton);
         container.appendChild(company);
         container.appendChild(location);
         container.appendChild(description);
-        container.appendChild(bookmarkButton);
 
         card.appendChild(container);
 
         document.getElementById("content").appendChild(card);
 
-
-        window.scrollTo(0, 800);
+        window.scrollTo(0, 1280);
     });
 
 
