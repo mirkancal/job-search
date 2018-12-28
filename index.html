@@ -4,7 +4,6 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="Login/login.css"/>
-    <script type="text/javascript" src="App.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
     <script>
@@ -19,7 +18,7 @@
         };
         firebase.initializeApp(config);
     </script>
-    <script src="Login/login.js"></script>
+    <script type="text/javascript" src="App.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
 </head>
 <body>
@@ -51,7 +50,7 @@
     <h3>Welcome User</h3>
     <p id="user_para">Welcome to Firebase web login Example. You're currently logged in.</p>
     <button onclick="logoutFromFirebase()">Logout</button>
-    <button onclick="jobs()">See Bookmarks</button>
+    <button onclick="seeBookmarks()">See Bookmarks</button>
 </div>
 
 <div id="search_div" class="search-job">

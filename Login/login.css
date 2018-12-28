@@ -35,7 +35,7 @@ input, button {
     border: 1px solid #777;
 }
 
-.main-div button, .loggedin-div button, .sign-up-div button, .search-job button {
+.main-div button, .loggedin-div button, .sign-up-div button {
     background: #5d8ffc;
     color: #fff;
     border: 1px solid #5d8ffc;
@@ -49,7 +49,7 @@ input, button {
     margin-bottom: 15px;
 }
 
-.main-div button:hover, .loggedin-div button:hover, .search-job button:hover{
+.main-div button:hover, .loggedin-div button:hover{
     background: #fff;
     color: #5d8ffc;
     border: 1px solid #5d8ffc;
